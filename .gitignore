@@ -1,0 +1,16 @@
+# Java build output
+out/
+*.class
+
+# Local extraction artifacts from PDF/DOCX analysis
+_pdf_extract/
+_docx_extract/
+
+# IDE/editor files
+.idea/
+.vscode/
+*.iml
+
+# OS files
+Thumbs.db
+.DS_Store
