@@ -367,7 +367,7 @@ public class PosSwingFrame extends JFrame {
 
         try {
             Transaksi transaksi = transaksiService.checkout(activePelanggan, cartItems,
-                    payment.metode(), payment.jumlahBayar());
+                    payment.metode(), total);
             cartModel.setRowCount(0);
             refreshPelangganBooks(bukuService.tampilSemua());
             showText("Struk Transaksi", receipt(transaksi));
@@ -378,28 +378,14 @@ public class PosSwingFrame extends JFrame {
 
     private PaymentInput askPayment(BigDecimal total) {
         JComboBox<String> metode = new JComboBox<>(new String[]{"Transfer Bank", "E-Wallet"});
-        JTextField jumlahBayar = new JTextField();
-
-        while (true) {
-            JPanel form = formPanel(new String[]{"Total", "Metode", "Jumlah Bayar"},
-                    new java.awt.Component[]{new JLabel(Money.rupiah(total)), metode, jumlahBayar});
-            int result = JOptionPane.showConfirmDialog(this, form, "Pembayaran",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-            if (result != JOptionPane.OK_OPTION) {
-                return null;
-            }
-
-            try {
-                BigDecimal bayar = new BigDecimal(jumlahBayar.getText().trim());
-                if (bayar.compareTo(total) < 0) {
-                    message("Pembayaran gagal. Uang kurang. Total yang harus dibayar: " + Money.rupiah(total));
-                    continue;
-                }
-                return new PaymentInput((String) metode.getSelectedItem(), bayar);
-            } catch (NumberFormatException exception) {
-                message("Jumlah bayar harus berupa angka.");
-            }
+        JPanel form = formPanel(new String[]{"Total", "Metode", "Nominal Bayar"},
+                new java.awt.Component[]{new JLabel(Money.rupiah(total)), metode, new JLabel(Money.rupiah(total))});
+        int result = JOptionPane.showConfirmDialog(this, form, "Pembayaran",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (result != JOptionPane.OK_OPTION) {
+            return null;
         }
+        return new PaymentInput((String) metode.getSelectedItem());
     }
 
     private void lihatSemuaTransaksi() {
@@ -576,6 +562,6 @@ public class PosSwingFrame extends JFrame {
     private record LoginInput(String username, String password) {
     }
 
-    private record PaymentInput(String metode, BigDecimal jumlahBayar) {
+    private record PaymentInput(String metode) {
     }
 }

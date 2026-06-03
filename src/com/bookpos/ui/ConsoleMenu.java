@@ -201,19 +201,10 @@ public class ConsoleMenu {
         }
 
         BigDecimal totalBayar = tampilkanRingkasanPembelian(cart);
-        while (true) {
-            String metode = pilihMetodePembayaran();
-            BigDecimal jumlahBayar = input.decimal("Jumlah bayar: ");
-            if (jumlahBayar.compareTo(totalBayar) < 0) {
-                System.out.println("Pembayaran gagal. Uang kurang. Total yang harus dibayar: "
-                        + Money.rupiah(totalBayar));
-                continue;
-            }
-
-            Transaksi transaksi = transaksiService.checkout(pelanggan, cart, metode, jumlahBayar);
-            cetakStruk(transaksi);
-            return;
-        }
+        String metode = pilihMetodePembayaran();
+        System.out.println("Nominal pembayaran otomatis: " + Money.rupiah(totalBayar));
+        Transaksi transaksi = transaksiService.checkout(pelanggan, cart, metode, totalBayar);
+        cetakStruk(transaksi);
     }
 
     private BigDecimal tampilkanRingkasanPembelian(List<CartItem> cart) {
