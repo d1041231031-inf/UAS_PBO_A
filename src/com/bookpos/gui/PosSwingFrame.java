@@ -493,7 +493,6 @@ public class PosSwingFrame extends JFrame {
         builder.append("Total        : ").append(Money.rupiah(transaksi.hitungTotal())).append(System.lineSeparator());
         builder.append("Metode       : ").append(transaksi.getPembayaran().getMetode()).append(System.lineSeparator());
         builder.append("Bayar        : ").append(Money.rupiah(transaksi.getPembayaran().getJumlahBayar())).append(System.lineSeparator());
-        builder.append("Kembalian    : ").append(Money.rupiah(transaksi.getPembayaran().getKembalian())).append(System.lineSeparator());
         builder.append("Status       : ").append(transaksi.getPembayaran().getStatus()).append(System.lineSeparator());
         builder.append("=====================================").append(System.lineSeparator());
         return builder.toString();

@@ -305,7 +305,6 @@ public class ConsoleMenu {
         System.out.println("Total        : " + Money.rupiah(transaksi.hitungTotal()));
         System.out.println("Metode       : " + transaksi.getPembayaran().getMetode());
         System.out.println("Bayar        : " + Money.rupiah(transaksi.getPembayaran().getJumlahBayar()));
-        System.out.println("Kembalian    : " + Money.rupiah(transaksi.getPembayaran().getKembalian()));
         System.out.println("Status       : " + transaksi.getPembayaran().getStatus());
         System.out.println("=====================================");
     }
