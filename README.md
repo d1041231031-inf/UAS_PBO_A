@@ -2,6 +2,11 @@
 
 Sistem POS Java untuk tugas PBO berdasarkan laporan POS buku online. Versi ini **Java-only**: data disimpan sementara di memori program memakai collection Java, tanpa SQL, tanpa MySQL, dan tanpa JDBC connector. Program tersedia dalam dua mode: console dan GUI Java Swing.
 
+## Nama Anggota
+- Arif Fadhilah (D1041231031)
+- Djapianus Thebrianto (D1041231020)
+- Rayhan Nuerjamman (D1041231088)
+
 ## Fitur
 
 - Login admin dan pelanggan.
